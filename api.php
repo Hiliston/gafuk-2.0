@@ -5,12 +5,18 @@ include "access.php";
 include "commands.php";
 
 function start(){
-    $json_array = getJSONAsk($_GET);
+    //$json_array = getJSONAsk($_GET);
+    //var_dump($_GET);
+
+
+    $jsonStr = file_get_contents("php://input");
+    $json_array = getJSONAsk($jsonStr);
     echo $json_array;
+    //var_dump($jsonStr);
 }
 
 
-
+start();
 
 
 
@@ -40,7 +46,16 @@ function start(){
             "login" => "$login",
             "token" => "$token",
             "need_confirm_email" => "true/false"
-        ]
+            ],
+        "data" => [
+            "login" => "",
+            "email" => "",
+            "group_id" => "",
+            "score" => "",
+            "avatar" => "",
+            "registration" => "",
+            "last_visit" => ""
+                    ],
     ];
 
 

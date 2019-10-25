@@ -142,17 +142,6 @@ var_dump(time());
 var_dump($result);*/
 //include  "./templates/letter.php";
 
-function test2($a, $b, $c){
-    if(!empty($a)){
-        if($a = 5){
-            $result = true;
-        }else{
-            $result = false;
-        }
-    }else{
-
-    }
-}
 
 
 
