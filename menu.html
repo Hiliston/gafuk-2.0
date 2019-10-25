@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+   
+
+    <div id="list1" class="dropdown-check-list" tabindex="100">
+        <span class="anchor">Выберите</span>
+        <ul class="items">
+           <h2>Тип игры</h2>
+            <li><input type="checkbox" />Новинка </li>
+            <li><input type="checkbox" />Обычная</li>
+            <li><input type="checkbox" />Предзаказ </li>
+            <li><input type="checkbox" />Скидка </li>
+            <li><input type="checkbox" />TEST </li>
+            <li><input type="checkbox" />TEST </li>
+            <li><input type="checkbox" />TEST</li>
+        </ul>
+    </div>
+    
+
+    <script type="text/javascript">
+        var checkList = document.getElementById('list1');
+        checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+            if (checkList.classList.contains('visible'))
+                checkList.classList.remove('visible');
+            else
+                checkList.classList.add('visible');
+        }
+
+    </script>
+
+
+</body>
+</html>
