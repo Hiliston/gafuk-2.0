@@ -1,8 +1,11 @@
 <?php
-include "json.php";
+/*include "json.php";*/
 include "auth.php";
 include "access.php";
 include "commands.php";
+include "json.php";
+
+/*include "test.php";*/
 
 function start(){
     //$json_array = getJSONAsk($_GET);
@@ -10,7 +13,7 @@ function start(){
 
 
     $jsonStr = file_get_contents("php://input");
-    $json_array = getJSONAsk($jsonStr);
+    $json_array = getJSONAsk2($jsonStr);
     echo $json_array;
     //var_dump($jsonStr);
 }
