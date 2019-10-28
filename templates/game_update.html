@@ -1,0 +1,40 @@
+{% extends 'share/base_share.html' %}
+{% load staticfiles %}
+{% block title%}
+Изменить игру
+{% endblock %}
+
+
+ {% block header %}
+<h5 class="mb-5">Укажите верный URL на страницу с игрой. <br>Данные подтянутся автоматически..</h5>
+  {% endblock %}
+
+
+{% block content %}
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+  Похоже, PSN не ответил. Попробуйте еще раз (будет выбран другой прокси-сервер).
+</div>
+{% endif %}
+
+<form action ="{% url 'game_update_url' id=game.id%}" method = "post" id="len">
+{% csrf_token %}
+{% for field in form %}
+ <div class="form-group">
+   {% if field.errors %}
+ <div class="alert alert-danger">
+              {{ field.errors }}
+    </div>
+   {% endif %}
+    {{ field.label }}
+    {{ field }}
+   </div>
+   {% endfor %}
+
+<button type="submit" class="btn btn-primary">Изменить</button>
+
+  </form>
+
+
+{% endblock %}

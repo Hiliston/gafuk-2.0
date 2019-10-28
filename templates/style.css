@@ -1,0 +1,75 @@
+.my-border{
+border: 1px dashed black;
+border-radius: 15px;
+
+}
+.my-border-card{
+border: 4px double black;
+
+
+}
+.admin-panel {
+	border: 1px solid #999;
+	border-radius: 2px;
+	position: fixed;
+	right: 50px;
+	bottom: 30px;
+	opacity: 0.3;
+	padding: 15px;
+}
+.admin-panel:hover{
+	opacity: 1;
+}
+.admin-panel a{
+	display: block;
+	margin: 5px 0;
+}
+	
+a.edit, a.delete{
+	display: none;
+}
+
+.dropdown-check-list {
+  display: inline-block;
+}
+.dropdown-check-list .anchor {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 50px 5px 10px;
+  border: 1px solid #ccc;
+}
+.dropdown-check-list .anchor:after {
+  position: absolute;
+  content: "";
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  padding: 5px;
+  right: 10px;
+  top: 20%;
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+.dropdown-check-list .anchor:active:after {
+  right: 8px;
+  top: 21%;
+}
+.dropdown-check-list ul.items {
+  padding: 2px;
+  display: none;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.dropdown-check-list ul.items li {
+  list-style: none;
+}
+.dropdown-check-list.visible .anchor {
+  color: #0094ff;
+}
+.dropdown-check-list.visible .items {
+  display: block;
+}

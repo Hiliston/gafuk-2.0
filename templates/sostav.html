@@ -1,0 +1,202 @@
+{% extends 'share/base_share.html' %}
+{% load staticfiles %}
+{% block title%}
+Состав №{{ sostav.id }}
+{% endblock %}
+
+ {% block header %}
+<h2 class="mb-5">Состав №{{ sostav.id }} - {{ sostav.to_game }}:</h2>
+  {% endblock %}
+{% block content %}
+
+
+<div class="row justify-content-md-center">
+   <div class="col col-lg-8 col-md-8">
+
+ <div class="alert alert-warning my-border" role="alert"> <center>
+    <div style = "display: flex; justify-content: space-between;">
+    <p>П1 <b>{{ sostav.p1 }}</b>
+      {% if not sostav.p1 %}
+      <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+        <button type="submit" name = "zapis" value = "{{ sostav.id }}__p1" class="btn btn-warning btn-sm">Записаться</button>
+      </form>
+      {% endif %}
+        {{ price_list.p1 }} руб.
+{% if sostav.p1 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "exit" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">X</button>
+</form>
+  {% endif %}
+
+   {% if sostav.p1_status == 1 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "req" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Реквизиты отправлены</button>
+</form>
+  {% endif %}
+     {% if sostav.p1_status == 3 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "opl" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Оплатил</button>
+</form>
+  {% endif %}
+       {% if sostav.p1_status == 4 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "opl_yes" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
+</form>
+  {% endif %}
+      {% if sostav.p1_status == 5 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "send_data" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Отправить данные</button>
+</form>
+  {% endif %}
+     {% if sostav.p1_status == 6 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "activ" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Консоль активирована</button>
+</form>
+  {% endif %}
+
+      </p></div>
+<div style = "display: flex; justify-content: space-between;">
+      <p>П2 <b>{{ sostav.p2 }}</b>
+        {% if not sostav.p2 %}
+        <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+          <button type="submit" name = "zapis" value = "{{ sostav.id }}__p2" class="btn btn-warning btn-sm">Записаться</button>
+        </form>
+        {% endif %}
+          {{ price_list.p2 }} руб.
+    {% if sostav.p2 %}
+    <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+    <button type="submit" name = "exit" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">X</button>
+    </form>
+    {% endif %}
+
+         {% if sostav.p1_status > 0 and sostav.p2_status == 1 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "req" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Отправить реквизиты</button>
+</form>
+  {% endif %}
+           {% if sostav.p1_status > 0 and sostav.p2_status == 3 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "opl" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Оплатил</button>
+</form>
+  {% endif %}
+             {% if sostav.p1_status > 0 and sostav.p2_status == 4 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "yes" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
+</form>
+  {% endif %}
+             {% if sostav.p1_status > 0 and sostav.p2_status == 5 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "send_data" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Отправить данные</button>
+</form>
+  {% endif %}
+             {% if sostav.p1_status > 0 and sostav.p2_status == 6 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "activ" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Консоль активирована</button>
+</form>
+  {% endif %}
+
+        </p></div>
+<div style = "display: flex; justify-content: space-between;">
+        <p>П4 <b>{{ sostav.p4_1 }}</b>
+          {% if not sostav.p4_1 %}
+          <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+            <button type="submit" name = "zapis" value = "{{ sostav.id }}__p41" class="btn btn-warning btn-sm">Записаться</button>
+          </form>
+          {% endif %}
+            {{ price_list.p4_1 }} руб.
+    {% if sostav.p4_1 %}
+      <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+      <button type="submit" name = "exit" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">X</button>
+    </form>
+      {% endif %}
+         {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 1 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "req" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Отправить реквизиты</button>
+</form>
+  {% endif %}
+     {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 3 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "opl" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Оплатил</button>
+</form>
+  {% endif %}
+       {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 4 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "yes" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
+</form>
+  {% endif %}
+       {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 5 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "send_data" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Отправить данные</button>
+</form>
+  {% endif %}
+       {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 6 and sostav.p4_2_status > 0 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "activ" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Консоль активированал</button>
+</form>
+  {% endif %}
+
+          </p></div>
+<div style = "display: flex; justify-content: space-between;">
+          <p>П4 <b>{{ sostav.p4_2 }}</b>
+            {% if not sostav.p4_2 %}
+            <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+              <button type="submit" name = "zapis" value = "{{ sostav.id }}__p42" class="btn btn-warning btn-sm">Записаться</button>
+            </form>
+            {% endif %}
+             {{ price_list.p4_2 }} руб.
+      {% if sostav.p4_2 %}
+        <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+        <button type="submit" name = "exit" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">X</button>
+      </form>
+        {% endif %}
+
+                 {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 1 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "req" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Отправить реквизиты</button>
+</form>
+  {% endif %}
+
+
+                 {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 3 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "opl" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Оплатил</button>
+</form>
+  {% endif %}
+
+              {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 4 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "yes" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
+</form>
+  {% endif %}
+
+              {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 5 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "send_data" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Отправить данные</button>
+</form>
+  {% endif %}
+
+              {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 6 %}
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "activ" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Консоль активирована</button>
+</form>
+  {% endif %}
+            </p></center></div>
+
+</div></div>
+
+<h4>Лог:</h4>
+
+
+
+<div class="alert alert-dark" role="alert">
+  {% for sostav in sostav.log_text.all %}
+  {{ sostav}}<br>
+  {% endfor %}
+</div>
+
+{% endblock %}
+{% block admin-panel %}
+
+<a href="{% url 'sostav_update_url' id=sostav.id%}" class = "btn-light btn-sm" >Изменить состав</a>
+
+ {% endblock %}

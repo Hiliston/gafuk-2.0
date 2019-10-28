@@ -1,0 +1,28 @@
+{% extends 'share/base_share.html' %}
+{% load staticfiles %}
+{% block title%}
+Изменить состав
+{% endblock %}
+
+{% block content %}
+<form action ="{% url 'sostav_update_url' id=share.id%}" method = "post">
+{% csrf_token %}
+{% for field in form %}
+ <div class="form-group">
+   {% if field.errors %}
+ <div class="alert alert-danger">
+              {{ field.errors }}
+    </div>
+   {% endif %}
+    {{ field.label }}
+    {{ field }}
+   </div>
+   {% endfor %}
+
+<button type="submit" class="btn btn-primary">Изменить</button>
+
+  </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'share/base_share.html' %}
+{% load staticfiles %}
+{% block title%}
+{{ game.game }}
+{% endblock %}
+
+ {% block header %}
+<h2 class="mb-5">Составы на {{ game.game }}:</h2>
+  {% endblock %}
+
+{% block content %}
+
+
+<div class="card mb-3 my-border-card" style="max-width: 700px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{% static game.img %}" class="card-img" alt="{{ game.game }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ game.game }}</h5>
+        <p class="card-text">Цена: <b>{{ game.price }}</b></p>
+        <p class="card-text"><small class="text-muted">Дата выхода: <b>{{ game.date }}</b></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+{% for string in game.share.all %}
+<div class="row justify-content-md-center">
+   <div class="col col-lg-8 col-md-8">
+
+  <div class="alert alert-warning my-border" role="alert" ><center>
+    <div style = "display: flex; justify-content: space-between;">
+    <p>П1	<b>{{ string.p1 }}</b>
+      {% if not string.p1 %}
+      <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+        <button type="submit" name = "zapis" value = "{{ string.id }}__p1" class="btn btn-warning btn-sm">Записаться</button>
+      </form>
+      {% endif %}
+        {{ price_list.p1 }} руб.
+{% if string.p1 %}
+  <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "exit" value = "{{ string.id }}__p1" class="btn btn-secondary btn-sm">X</button>
+</form>
+  {% endif %}
+
+
+
+      </p></div>
+<div style = "display: flex; justify-content: space-between;">
+      <p>П2	<b>{{ string.p2 }}</b>
+        {% if not string.p2 %}
+        <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+          <button type="submit" name = "zapis" value = "{{ string.id }}__p2" class="btn btn-warning btn-sm">Записаться</button>
+        </form>
+        {% endif %}
+          {{ price_list.p2 }} руб.
+    {% if string.p2 %}
+    <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+    <button type="submit" name = "exit" value = "{{ string.id }}__p2" class="btn btn-secondary btn-sm">X</button>
+    </form>
+    {% endif %}
+
+
+
+        </p></div>
+<div style = "display: flex; justify-content: space-between;">
+        <p>П4	<b>{{ string.p4_1 }}</b>
+          {% if not string.p4_1 %}
+          <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+            <button type="submit" name = "zapis" value = "{{ string.id }}__p41" class="btn btn-warning btn-sm">Записаться</button>
+          </form>
+          {% endif %}
+            {{ price_list.p4_1 }} руб.
+    {% if string.p4_1 %}
+      <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+      <button type="submit" name = "exit" value = "{{ string.id }}__p41" class="btn btn-secondary btn-sm">X</button>
+    </form>
+      {% endif %}
+
+
+
+          </p></div>
+<div style = "display: flex; justify-content: space-between;">
+          <p>П4	<b>{{ string.p4_2 }}</b>
+            {% if not string.p4_2 %}
+            <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+              <button type="submit" name = "zapis" value = "{{ string.id }}__p42" class="btn btn-warning btn-sm">Записаться</button>
+            </form>
+            {% endif %}
+              {{ price_list.p4_2 }} руб.
+      {% if string.p4_2 %}
+        <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
+        <button type="submit" name = "exit" value = "{{ string.id }}__p42" class="btn btn-secondary btn-sm">X</button>
+      </form>
+        {% endif %}
+
+ 
+
+            </p></div>
+            <div class="row justify-content-md-center"><a href = "{% url 'sostav_url' id=string.id%}">Подробная информация</a></div>
+  </center></div>
+
+<br>
+
+
+</div></div>
+	{% endfor %}
+
+
+{% endblock %}
+{% block admin-panel %}
+<a href="{% url 'game_create_url' %}" class = "btn-light btn-sm">Добавить игру</a>
+<a href="{% url 'game_update_url' id=game.id%}" class = "btn-light btn-sm edit" style = "{% if detail %}display: block;{% endif %}">Изменить игру</a>
+<a href="{% url 'game_delete_url' id=game.id%}" class = "btn-danger btn-sm delete" style = "{% if detail %}display: block;{% endif %}">Удалить игру</a>
+ {% endblock %}

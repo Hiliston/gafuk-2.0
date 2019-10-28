@@ -1,0 +1,106 @@
+{% extends 'share/base_share.html' %}
+{% load staticfiles %}
+{% block title%}
+Gafuk - Составы
+{% endblock %}
+
+ {% block header %}
+<h2 class="mb-5">Playstation 4</h2>
+  {% endblock %}
+{% block content %}
+
+
+
+<form action ="{% url 'share_list_url' %}" method = "get">
+ <div class="input-group">
+  
+  <select class="custom-select" id="inputGroupSelect04" name ="select" style="height: 50px;">
+  <option selected>Выберите игру...</option>
+  {% for game in games %}
+		 <option value="{{ game.id }}" >{{ game.game }}</option>
+	{% endfor %}
+
+  </select>
+
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit">Показать</button>
+  </div>
+</div>
+</form>
+
+<br>
+ <div id="list1" class="dropdown-check-list" tabindex="100">
+        <span class="anchor">Тип </span>
+   <ul class="items">
+          
+  <li>
+    <input id="ch1" type="checkbox">
+    <label for="ch1">Новинка</label> </li>
+  <li>
+    <input id="ch2" type="checkbox">
+    <label for="ch2">Обычная</label>
+  </li>
+  <li>
+    <input id="ch3" type="checkbox"> 
+    <label for="ch3">Предзаказ</label>
+  </li>
+  <li>
+    <input id="ch4" type="checkbox"> 
+    <label for="ch4">Скидка</label>
+  </li>
+</ul>
+    </div>
+	 <div id="list1" class="dropdown-check-list" tabindex="100">
+        <span class="anchor">Организатор </span>
+        <ul class="items">
+          <li>
+    <input id="ch1" type="checkbox">
+    <label for="ch1">Brodnik</label> </li>
+  <li>
+    <input id="ch2" type="checkbox">
+    <label for="ch2">slim63rus</label>
+  </li>
+            
+
+      
+        </ul>
+    </div>
+		 <div id="list1" class="dropdown-check-list" tabindex="100">
+        <span class="anchor">Показывать </span>
+        <ul class="items">
+          
+		    <li>
+    <input id="ch1" type="checkbox">
+    <label for="ch1">Только мои</label> </li>
+  <li>
+    <input id="ch2" type="checkbox">
+    <label for="ch2">Только свободные</label>
+  </li>
+  <li>
+    <input id="ch3" type="checkbox"> 
+    <label for="ch3">Только собранныез</label>
+  </li>
+  <li>
+    <input id="ch4" type="checkbox"> 
+    <label for="ch4">Показывать отобранные</label>
+  </li>
+           
+      
+        </ul>
+    </div>
+    
+
+    <script type="text/javascript">
+        var checkList = document.getElementById('list1');
+        checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+            if (checkList.classList.contains('visible'))
+                checkList.classList.remove('visible');
+            else
+                checkList.classList.add('visible');
+        }
+    </script>
+
+
+
+
+{% endblock %}

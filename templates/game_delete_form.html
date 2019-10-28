@@ -1,0 +1,16 @@
+{% extends 'share/base_share.html' %}
+{% load staticfiles %}
+{% block title%}
+Удаление игры - {{game.game}}
+{% endblock %}
+
+{% block content %}
+
+<form action ="{% url 'game_delete_url' game.id%}" method = "post">{% csrf_token %}
+        <h3>Вы уверены, что нужно удалить игру <b>{{game.game}}</b>? Все составы на эту игру также будут удалены!</h3>
+		<a href="{% url 'share_game_url' id=game.id%}">Отмента</a>
+		<button type="submit" name = "delete"  class="btn btn-warning btn-sm">Удалить</button>
+      </form>
+
+
+{% endblock %}
