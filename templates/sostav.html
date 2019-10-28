@@ -11,174 +11,397 @@
 
 
 <div class="row justify-content-md-center">
-   <div class="col col-lg-8 col-md-8">
+   <div class="col col-auto">
 
  <div class="alert alert-warning my-border" role="alert"> <center>
     <div style = "display: flex; justify-content: space-between;">
-    <p>П1 <b>{{ sostav.p1 }}</b>
+    <p>П1 <div class="ml-3"><b>{{ sostav.p1 }}</b></div>
       {% if not sostav.p1 %}
+      <div class="ml-3">
       <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
         <button type="submit" name = "zapis" value = "{{ sostav.id }}__p1" class="btn btn-warning btn-sm">Записаться</button>
       </form>
+    </div>
       {% endif %}
-        {{ price_list.p1 }} руб.
-{% if sostav.p1 %}
+       <div class="ml-3"> {{ price_list.p1 }} руб.</div>
+
+      {% if sostav.p1_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p1_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if sostav.p1_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if sostav.p1_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if sostav.p1_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p1_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if sostav.p1_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+      {% if sostav.p1_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#10004;</font>  
+   </div>
+   {% endif %}
+
+      {% if sostav.p1_status == 9 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#9745;</font>  
+   </div>
+   {% endif %}
+         
+
+{% if sostav.p1 and  sostav.p1_status < 2%} 
+<div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-  <button type="submit" name = "exit" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">X</button>
+  <button type="submit" name = "exit" value = "{{ sostav.id }}__p1" class="btn btn-danger btn-sm">X</button>
 </form>
+</div>
   {% endif %}
 
    {% if sostav.p1_status == 1 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+   <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-  <button type="submit" name = "req" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Реквизиты отправлены</button>
+  <button type="submit" name = "req" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Отправить реквизиты</button>
 </form>
+</div>
   {% endif %}
-     {% if sostav.p1_status == 3 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+     {% if sostav.p1_status == 3  %}
+     <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "opl" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Оплатил</button>
 </form>
+</div>
   {% endif %}
-       {% if sostav.p1_status == 4 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+       {% if sostav.p1_status == 4  %}
+       <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "opl_yes" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
 </form>
+</div>
   {% endif %}
-      {% if sostav.p1_status == 5 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+      {% if sostav.p1_status == 5  %}
+      <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "send_data" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Отправить данные</button>
 </form>
+</div>
   {% endif %}
-     {% if sostav.p1_status == 6 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+
+        {% if sostav.p1_status == 6  %}
+      <div class="ml-3">
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "yes_data" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Данные получены</button>
+</form>
+</div>
+  {% endif %}
+
+     {% if sostav.p1_status == 7  %}
+     <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "activ" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Консоль активирована</button>
 </form>
+</div>
+  {% endif %}
+      {% if sostav.p1_status == 8  %}
+      <div class="ml-3">
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "deactiv" value = "{{ sostav.id }}__p1" class="btn btn-secondary btn-sm">Готов к деактивациии</button>
+</form>
+</div>
   {% endif %}
 
       </p></div>
 <div style = "display: flex; justify-content: space-between;">
-      <p>П2 <b>{{ sostav.p2 }}</b>
+      <p>П2 <div class="ml-3"><b>{{ sostav.p2 }}</b></div>
         {% if not sostav.p2 %}
+        <div class="ml-3">
         <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
           <button type="submit" name = "zapis" value = "{{ sostav.id }}__p2" class="btn btn-warning btn-sm">Записаться</button>
         </form>
+      </div>
         {% endif %}
-          {{ price_list.p2 }} руб.
-    {% if sostav.p2 %}
+         <div class="ml-3"> {{ price_list.p2 }} руб.</div>
+
+       {% if sostav.p2_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p2_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if sostav.p2_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if sostav.p2_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if sostav.p2_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p2_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if sostav.p2_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+  {% if sostav.p2_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#9745;</font>  
+   </div>
+   {% endif %}
+      
+
+    {% if sostav.p2 and  sostav.p2_status < 2%}
+    <div class="ml-3">
     <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-    <button type="submit" name = "exit" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">X</button>
+    <button type="submit" name = "exit" value = "{{ sostav.id }}__p2" class="btn btn-danger btn-sm">X</button>
     </form>
+  </div>
     {% endif %}
 
-         {% if sostav.p1_status > 0 and sostav.p2_status == 1 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+          {% if  sostav.p4_2_status  > 0  and sostav.p4_1_status > 0 and sostav.p2_status == 1 and sostav.p1_status > 0 %}
+         <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "req" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Отправить реквизиты</button>
 </form>
+</div>
   {% endif %}
-           {% if sostav.p1_status > 0 and sostav.p2_status == 3 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+           {% if sostav.p2_status == 3  %}
+           <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "opl" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Оплатил</button>
 </form>
+</div>
   {% endif %}
-             {% if sostav.p1_status > 0 and sostav.p2_status == 4 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+             {% if  sostav.p2_status == 4  %}
+             <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-  <button type="submit" name = "yes" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
+  <button type="submit" name = "opl_yes" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
 </form>
+</div>
   {% endif %}
-             {% if sostav.p1_status > 0 and sostav.p2_status == 5 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+             {% if  sostav.p2_status == 5  %}
+             <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "send_data" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Отправить данные</button>
 </form>
+</div>
   {% endif %}
-             {% if sostav.p1_status > 0 and sostav.p2_status == 6 and sostav.p4_1_status > 0 and sostav.p4_2_status > 0 %}
+             {% if  sostav.p2_status == 6  %}
+             <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-  <button type="submit" name = "activ" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Консоль активирована</button>
-</form>
+  <button type="submit" name = "activ" value = "{{ sostav.id }}__p2" class="btn btn-secondary btn-sm">Данные получены</button>
+</form></div>
   {% endif %}
 
         </p></div>
 <div style = "display: flex; justify-content: space-between;">
-        <p>П4 <b>{{ sostav.p4_1 }}</b>
+        <p>П4 <div class="ml-3"><b>{{ sostav.p4_1 }}</b></div>
           {% if not sostav.p4_1 %}
+          <div class="ml-3">
           <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
             <button type="submit" name = "zapis" value = "{{ sostav.id }}__p41" class="btn btn-warning btn-sm">Записаться</button>
           </form>
+        </div>
           {% endif %}
-            {{ price_list.p4_1 }} руб.
-    {% if sostav.p4_1 %}
+            <div class="ml-3">{{ price_list.p4_1 }} руб.</div>
+
+       {% if sostav.p4_1_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p4_1_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if sostav.p4_1_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if sostav.p4_1_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if sostav.p4_1_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p4_1_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if sostav.p4_1_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+      {% if sostav.p4_1_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#10004;</font>  
+   </div>
+   {% endif %}
+
+    {% if sostav.p4_1 and  sostav.p4_1_status < 2%}
+    <div class="ml-3">
       <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-      <button type="submit" name = "exit" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">X</button>
-    </form>
+      <button type="submit" name = "exit" value = "{{ sostav.id }}__p41" class="btn btn-danger btn-sm">X</button>
+    </form></div>
       {% endif %}
-         {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 1 and sostav.p4_2_status > 0 %}
+          {% if  sostav.p4_2_status > 0 and sostav.p4_1_status == 1 and sostav.p2_status > 0 and sostav.p1_status > 0 %}
+         <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "req" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Отправить реквизиты</button>
 </form>
+</div>
   {% endif %}
-     {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 3 and sostav.p4_2_status > 0 %}
+     {% if  sostav.p4_1_status == 3  %}
+     <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "opl" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Оплатил</button>
 </form>
+</div>
   {% endif %}
-       {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 4 and sostav.p4_2_status > 0 %}
+       {% if  sostav.p4_1_status == 4  %}
+       <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-  <button type="submit" name = "yes" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
+  <button type="submit" name = "opl_yes" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
 </form>
+</div>
   {% endif %}
-       {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 5 and sostav.p4_2_status > 0 %}
+       {% if  sostav.p4_1_status == 5  %}
+       <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "send_data" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Отправить данные</button>
 </form>
+</div>
   {% endif %}
-       {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status == 6 and sostav.p4_2_status > 0 %}
+      {% if  sostav.p4_1_status == 6  %}
+       <div class="ml-3">
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "yes_data" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Данные получены</button>
+</form>
+</div>
+  {% endif %}
+       {% if  sostav.p4_1_status == 7  %}
+       <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "activ" value = "{{ sostav.id }}__p41" class="btn btn-secondary btn-sm">Консоль активированал</button>
 </form>
+</div>
   {% endif %}
 
           </p></div>
 <div style = "display: flex; justify-content: space-between;">
-          <p>П4 <b>{{ sostav.p4_2 }}</b>
+          <p>П4 <div class="ml-3"><b>{{ sostav.p4_2 }}</b></div>
             {% if not sostav.p4_2 %}
+            <div class="ml-3">
             <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
               <button type="submit" name = "zapis" value = "{{ sostav.id }}__p42" class="btn btn-warning btn-sm">Записаться</button>
-            </form>
+            </form></div>
             {% endif %}
-             {{ price_list.p4_2 }} руб.
-      {% if sostav.p4_2 %}
+             <div class="ml-3">{{ price_list.p4_2 }} руб.</div>
+
+       {% if sostav.p4_2_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p4_2_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if sostav.p4_2_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if sostav.p4_2_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if sostav.p4_2_status > 2 %}  
+       <div class="ml-3">
+       {% if sostav.p4_2_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if sostav.p4_2_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+      {% if sostav.p4_2_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#10004;</font>  
+   </div>
+   {% endif %}
+
+      {% if sostav.p4_2 and  sostav.p4_2_status < 2%}
+      <div class="ml-3">
         <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-        <button type="submit" name = "exit" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">X</button>
+        <button type="submit" name = "exit" value = "{{ sostav.id }}__p42" class="btn btn-danger btn-sm">X</button>
       </form>
+    </div>
         {% endif %}
 
-                 {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 1 %}
+                 {% if  sostav.p4_2_status == 1 and sostav.p4_1_status > 0 and sostav.p2_status > 0 and sostav.p1_status > 0 %}
+                 <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "req" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Отправить реквизиты</button>
 </form>
+</div>
   {% endif %}
 
 
-                 {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 3 %}
+                 {% if sostav.p4_2_status == 3 %}
+                 <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "opl" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Оплатил</button>
 </form>
+</div>
   {% endif %}
 
-              {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 4 %}
+              {% if  sostav.p4_2_status == 4 %}
+              <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
-  <button type="submit" name = "yes" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
+  <button type="submit" name = "opl_yes" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Подтвердить оплату</button>
 </form>
+</div>
   {% endif %}
 
-              {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 5 %}
+              {% if  sostav.p4_2_status == 5 %}
+              <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "send_data" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Отправить данные</button>
 </form>
+</div>
+  {% endif %}
+            {% if  sostav.p4_2_status == 6 %}
+              <div class="ml-3">
+  <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
+  <button type="submit" name = "yes_data" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Данные получены</button>
+</form>
+</div>
   {% endif %}
 
-              {% if sostav.p1_status > 0 and sostav.p2_status > 0 and sostav.p4_1_status > 0 and sostav.p4_2_status == 6 %}
+              {% if  sostav.p4_2_status == 7 %}
+              <div class="ml-3">
   <form action ="{% url 'sostav_url' sostav.id%}" method = "post">{% csrf_token %}
   <button type="submit" name = "activ" value = "{{ sostav.id }}__p42" class="btn btn-secondary btn-sm">Консоль активирована</button>
 </form>
+</div>
   {% endif %}
             </p></center></div>
 

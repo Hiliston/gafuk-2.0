@@ -6,7 +6,7 @@
 
 
  {% block header %}
-<h5 class="mb-5">Укажите верный URL на страницу с игрой. <br>Данные подтянутся автоматически..</h5>
+<h5 class="mb-5">Если установлена галочка - <i>Автоматически получить данные с PSN</i>, нужно ввести только URL. Данные подтянутся автоматически.</h5>
   {% endblock %}
 
 
@@ -20,6 +20,11 @@
 
 <form action ="{% url 'game_update_url' id=game.id%}" method = "post" id="len">
 {% csrf_token %}
+
+ <div class="input-group-text">
+      <input type="checkbox" name="api" value="auto">&nbsp;Автоматически получить данные с PSN
+    </div> 
+<br>
 {% for field in form %}
  <div class="form-group">
    {% if field.errors %}

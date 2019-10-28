@@ -30,72 +30,234 @@
 
 {% for string in game.share.all %}
 <div class="row justify-content-md-center">
-   <div class="col col-lg-8 col-md-8">
+   <div class="col col-auto">
 
   <div class="alert alert-warning my-border" role="alert" ><center>
     <div style = "display: flex; justify-content: space-between;">
-    <p>П1	<b>{{ string.p1 }}</b>
+    <p>П1	<div class="ml-3"><b>{{ string.p1 }}</b></div>
+
       {% if not string.p1 %}
+      <div class="ml-3">
       <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
         <button type="submit" name = "zapis" value = "{{ string.id }}__p1" class="btn btn-warning btn-sm">Записаться</button>
       </form>
+    </div>
       {% endif %}
-        {{ price_list.p1 }} руб.
-{% if string.p1 %}
+
+        <div class="ml-3">{{ price_list.p1 }} руб.</div>
+
+     {% if string.p1_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p1_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if string.p1_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if string.p1_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if string.p1_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p1_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if string.p1_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+      {% if string.p1_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#10004;</font>  
+   </div>
+   {% endif %}
+
+      {% if string.p1_status == 9 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#9745;</font>  
+   </div>
+   {% endif %}
+
+
+{% if string.p1 and  string.p1_status < 2%}
+<div class="ml-3">
   <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
-  <button type="submit" name = "exit" value = "{{ string.id }}__p1" class="btn btn-secondary btn-sm">X</button>
+  <button type="submit" name = "exit" value = "{{ string.id }}__p1" class="btn btn-danger btn-sm">X</button>
 </form>
+</div>
   {% endif %}
 
 
 
       </p></div>
 <div style = "display: flex; justify-content: space-between;">
-      <p>П2	<b>{{ string.p2 }}</b>
+      <p>П2	<div class="ml-3"><b>{{ string.p2 }}</b></div>
         {% if not string.p2 %}
+        <div class="ml-3">
         <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
           <button type="submit" name = "zapis" value = "{{ string.id }}__p2" class="btn btn-warning btn-sm">Записаться</button>
         </form>
+      </div>
         {% endif %}
-          {{ price_list.p2 }} руб.
-    {% if string.p2 %}
+
+          <div class="ml-3">{{ price_list.p2 }} руб.</div>
+
+         {% if string.p2_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p2_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if string.p2_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if string.p2_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if string.p2_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p2_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if string.p2_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+  {% if string.p2_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#9745;</font>  
+   </div>
+   {% endif %}
+      
+
+    {% if string.p2 and  string.p2_status < 2%}
+    <div class="ml-3">
     <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
-    <button type="submit" name = "exit" value = "{{ string.id }}__p2" class="btn btn-secondary btn-sm">X</button>
+    <button type="submit" name = "exit" value = "{{ string.id }}__p2" class="btn btn-danger btn-sm">X</button>
     </form>
+  </div>
     {% endif %}
 
 
 
         </p></div>
 <div style = "display: flex; justify-content: space-between;">
-        <p>П4	<b>{{ string.p4_1 }}</b>
+        <p>П4	<div class="ml-3"><b>{{ string.p4_1 }}</b></div>
           {% if not string.p4_1 %}
+          <div class="ml-3">
           <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
             <button type="submit" name = "zapis" value = "{{ string.id }}__p41" class="btn btn-warning btn-sm">Записаться</button>
           </form>
+        </div>
           {% endif %}
-            {{ price_list.p4_1 }} руб.
-    {% if string.p4_1 %}
+            <div class="ml-3">{{ price_list.p4_1 }} руб.</div>
+
+          {% if string.p4_1_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p4_1_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if string.p4_1_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if string.p4_1_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if string.p4_1_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p4_1_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if string.p4_1_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+      {% if string.p4_1_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#10004;</font>  
+   </div>
+   {% endif %}
+
+
+
+    {% if string.p4_1 and  string.p4_1_status < 2%}
+    <div class="ml-3">
       <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
-      <button type="submit" name = "exit" value = "{{ string.id }}__p41" class="btn btn-secondary btn-sm">X</button>
+      <button type="submit" name = "exit" value = "{{ string.id }}__p41" class="btn btn-danger btn-sm">X</button>
     </form>
+  </div>
       {% endif %}
 
 
 
           </p></div>
 <div style = "display: flex; justify-content: space-between;">
-          <p>П4	<b>{{ string.p4_2 }}</b>
+          <p>П4	<div class="ml-3"><b>{{ string.p4_2 }}</b></div>
             {% if not string.p4_2 %}
+            <div class="ml-3">
             <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
               <button type="submit" name = "zapis" value = "{{ string.id }}__p42" class="btn btn-warning btn-sm">Записаться</button>
             </form>
+          </div>
             {% endif %}
-              {{ price_list.p4_2 }} руб.
-      {% if string.p4_2 %}
+              <div class="ml-3">{{ price_list.p4_2 }} руб.</div>
+
+        {% if string.p4_2_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p4_2_status == 3 %}
+       <font color = 'red'>$</font>
+     {% endif %}
+         {% if string.p4_2_status == 4%}
+       <font color = 'yellow'>$</font>
+     {% endif %}
+     {% if string.p4_2_status > 4%}
+       <font color = 'green'>$</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+
+    {% if string.p4_2_status > 2 %}  
+       <div class="ml-3">
+       {% if string.p4_2_status == 6 %}
+       <font color = 'red'>&#8592;</font>
+     {% endif %}
+         {% if string.p4_2_status > 6%}
+       <font color = 'green'>&#8592;</font>
+     {% endif %}
+   </div>
+   {% endif %}
+
+      {% if string.p4_2_status == 8 %}  
+       <div class="ml-3">
+       <font color = 'green'>&#10004;</font>  
+   </div>
+   {% endif %}
+
+
+      {% if string.p4_2 and  string.p4_2_status < 2%}
+      <div class="ml-3">
         <form action ="{% url 'share_game_url' game.id%}" method = "post">{% csrf_token %}
-        <button type="submit" name = "exit" value = "{{ string.id }}__p42" class="btn btn-secondary btn-sm">X</button>
+        <button type="submit" name = "exit" value = "{{ string.id }}__p42" class="btn btn-danger btn-sm">X</button>
       </form>
+    </div>
         {% endif %}
 
  
@@ -113,7 +275,7 @@
 
 {% endblock %}
 {% block admin-panel %}
-<a href="{% url 'game_create_url' %}" class = "btn-light btn-sm">Добавить игру</a>
+<a href="{% url 'game_create_url' %}" class = "btn-outline-info btn-sm">Добавить игру</a>
 <a href="{% url 'game_update_url' id=game.id%}" class = "btn-light btn-sm edit" style = "{% if detail %}display: block;{% endif %}">Изменить игру</a>
 <a href="{% url 'game_delete_url' id=game.id%}" class = "btn-danger btn-sm delete" style = "{% if detail %}display: block;{% endif %}">Удалить игру</a>
  {% endblock %}

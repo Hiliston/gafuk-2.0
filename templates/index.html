@@ -14,7 +14,7 @@ Gafuk - Составы
 <form action ="{% url 'share_list_url' %}" method = "get">
  <div class="input-group">
   
-  <select class="custom-select" id="inputGroupSelect04" name ="select" style="height: 50px;">
+  <select class="custom-select" id="inputGroupSelect04" name ="select" style="height: 50px; width: 250px;">
   <option selected>Выберите игру...</option>
   {% for game in games %}
 		 <option value="{{ game.id }}" >{{ game.game }}</option>
