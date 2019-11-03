@@ -1,0 +1,1 @@
+!function(n){n(window).on("load",function(){n(".chat-hist, .messages-line").mCustomScrollbar()})}(jQuery);
