@@ -2,49 +2,41 @@
 function getJSONAsk2($array)
 {
     $json_ask = json_decode($array, true);
+
     if(!empty($json_ask)){
         $auth = globalAuth($json_ask);
         //var_dump($auth);
 
         $command = $json_ask['command'];
-        
-        if($auth['success'] == "true"){
-            $status = "true";
+
+        $user_access = checkUserAccess($json_ask['auth']['login']);
+
+        if($auth['success'] === "true"){
             $data = makeData($json_ask);
-            $array_answer = [                                     //Массив для ответа оп API
-                "status" => "$status",
-                "command" => "$command",
-                "auth" => $auth,                     //$auth - Массив с блоком авторизации
-                "data" => $data
-            ];
+            if(($data != null) && ($data !== "not enough rights")){
+                $status = "true";
+            }else{
+                $status = "false";
+            }
+
         }else{
             $status = "false";
-            $data = "none";
-            $array_answer = [                                     //Массив для ответа оп API
-                "status" => "$status",
-                "command" => "$command",
-                "auth" => $auth,                     //$auth - Массив с блоком авторизации
-                "data" => $data
-            ];
+            $data = "null";
         }
-
-        $json_answer = json_encode($array_answer);
-        return $json_answer;
-
-
-
-
     }else{
         $status = "false";
-        $data = "none";
-        $array_answer = [                                     //Массив для ответа оп API
-            "status" => "$status",
-            "command" => "none",
-            "auth" => "none",                     //$auth - Массив с блоком авторизации
-            "data" => $data
-        ];
-        $json_answer = json_encode($array_answer);
-        return $json_answer;
+        $data = "null";
     }
+
+    $array_answer = [                                     //Массив для ответа оп API
+        "status" => "$status",
+        "command" => "$command",
+        "auth" => $auth,                     //$auth - Массив с блоком авторизации
+        "user_access" => $user_access,
+        "data" => $data
+    ];
+
+    $json_answer = json_encode($array_answer);
+    return $json_answer;
 
 }

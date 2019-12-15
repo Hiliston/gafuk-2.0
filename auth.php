@@ -34,7 +34,7 @@ function createNewToken($login, $token){           //Функция менят �
     $array = connectDB($query);
 
     if (!empty($array)){
-        $email_token = rand(100000, 900000);
+        $email_token = rand(100000, 999999);
         $timeset = time();
         //$lastday = (int)floor($dateto - $datefrom);
 
@@ -61,8 +61,8 @@ function generateMail($command, $login){                //Отправляет �
 
         $array_letter = [                                     //Конечный массив со всеми данными
             "status" => "true",
-            "command" => "none",
-            "data" => [
+            "command" => "get_personal_messages",
+            "auth" => [
                 "login" => "$login",
                 "token" => "$token",
                 "need_confirm_email" => "true",
@@ -143,83 +143,62 @@ function globalAuth($array){
         "token" => "$token",
         "need_confirm_email" => "$need_confirm_email"
     ];
-    //var_dump($global_auth);
     return $global_auth;                                   //Возвращаем блок auth
 }
 
-
-
-
-
-
-
-
-
-function test($data){
-    $json = json_encode($data);
-    echo "<a href='http://gafuk-new/$json'>Ссылка<a> ";
-    var_dump($json);
-}
-
-$data = [
-    "status" => "ok",
-    "command" => "proofmail",
-    "data" => [
-                "login" => "newbie",
-                "token" => "12345",
-                "email_token" => "563124"
-                ]
-        ];
-//test($data);
-//generateMail('proofYourMail');
-
-/*
-$datefrom = "1571931214";
-$dateto = time();
-$lastday = (int)floor($dateto - $datefrom);
-echo $lastday;
-
-if ($lastday >= "150"){
-    echo "Время вышло";
-}
-var_dump(time());
-*/
-
-
-/*$result = createNewToken('niga', '8888888888');
-var_dump($result);*/
-//include  "./templates/letter.php";
-
-
-
-
-
-
-
-
-
-
-
 function connectDB($query){
     $host = "localhost";
-    $user = "root";
+
+    /*$user = "root";
     $password = "root";
-    $database = "gafuk";
+    $database = "gafuk_new";*/
+
+    $user = "api_bd_user";
+    $password = "l76Rmq0";
+    $database = "api";
+
     $link = mysqli_connect($host, $user, $password, $database)
     or die("Ошибка " . mysqli_error($link));
     $result = mysqli_query($link, $query);
+    //var_dump($result);
     $type = gettype($result);
     if($type == 'boolean'){
         return $result;
-        var_dump($result);
+        //var_dump($result);
     }else{
-        $row = mysqli_fetch_assoc($result);   //Преобразует объект в массив, хз как это работает
+        $row = mysqli_fetch_assoc($result);
+        //var_dump($row);
     }
     return $row;
 }
 
 
+function connectDB_fetch_all($query){
+    $host = "localhost";
 
-/*$query = "select login from users";
-$testDB = connectDB($query);
-var_dump($testDB);*/
+    /*$user = "root";
+    $password = "root";
+    $database = "gafuk_new";*/
+
+    $user = "api_bd_user";
+    $password = "l76Rmq0";
+    $database = "api";
+
+    /*$database = "id9657271_id9593311_gafuk";
+    $user = "id9657271_id9593311_root";
+    $password = "root1";*/
+
+    $link = mysqli_connect($host, $user, $password, $database)
+    or die("Ошибка " . mysqli_error($link));
+    $result = mysqli_query($link, $query);
+    //var_dump($result);
+    $type = gettype($result);
+    if($type == 'boolean'){
+        return $result;
+        //var_dump($result);
+    }else{
+        $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        //var_dump($row);
+    }
+    return $row;
+}
